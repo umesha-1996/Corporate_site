@@ -1,0 +1,183 @@
+{% load wagtailcore_tags wagtailimages_tags static %}
+
+<footer class="bg-gray-900 text-white h-[550px] text-sm font-bold">
+
+ <div class="container mx-auto py-16 px-4">
+  <!-- Row 1 -->
+  <div class="hidden md:flex justify-between items-start text-center">
+
+    <!-- Visit Us -->
+    <div class="flex-1 flex flex-col items-center space-y-2 px-4">
+      <div class="flex items-center justify-center space-x-3">
+        {% if footer.visit_us_icon %}
+          {% image footer.visit_us_icon max-480x320 %}
+        {% else %}
+          <img src="{% static 'images/icon-map.png' %}" alt="CIBC Logo" class="h-auto w-auto" />
+        {% endif %}
+        <strong>Visit Us</strong>
+      </div>
+      <div class="text-sm text-gray-200 py-3">
+        {{ footer.visit_us }}
+      </div>
+    </div>
+
+    <!-- Separator -->
+    <div class="w-px h-44 bg-gray-300"></div>
+
+    <!-- Call Us -->
+<div class="flex-1 flex flex-col items-center space-y-4 px-4">
+  <div class="flex items-center justify-center space-x-3">
+    {% if footer.call_us_icon %}
+      {% image footer.call_us_icon max-480x320 %}
+    {% else %}
+      <img src="{% static 'images/icon-support.png' %}" alt="Support Icon" class="h-6 w-6" />
+    {% endif %}
+    <strong class="text-white text-lg">CALL US 24/7 </strong>
+  </div>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-white text-sm w-full max-w-4xl mt-2">
+    {% for contact in footer.call_us %}
+      <div class="flex flex-col items-start bg-gray-800 p-4 rounded-md shadow-md">
+        <span class="font-medium">{{ contact.value.country }}</span>
+        <span class="mt-1 text-blue-300">{{ contact.value.contact_no }}</span>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+
+    <!-- Separator -->
+    <div class="w-px h-44 bg-gray-300"></div>
+
+    <!-- Write to Us -->
+    <div class="flex-1 flex flex-col items-center space-y-2 px-4">
+      <div class="flex items-center justify-center space-x-3">
+        {% if footer.write_to_us_icon %}
+          {% image footer.write_to_us_icon max-480x320 %}
+        {% else %}
+          <img src="{% static 'images/icon-write-to-us.png' %}" alt="CIBC Logo" class="h-auto w-auto" />
+        {% endif %}
+        <strong>Write to Us</strong>
+      </div>
+      <div class="text-sm text-gray-200 py-3">
+        {{ footer.write_to_us }}
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="md:hidden space-y-6 text-center">
+
+  </div>
+</div>
+
+
+
+<br>
+<br>
+
+
+
+
+<!-- Row 2 -->
+<div class="flex justify-center text-sm mb-6 text-center">
+    <div class="max-w-3xl">  {% image footer.logo max-180x120 %} </div>
+  <div class="max-w-3xl">{{ footer.introduction }}</div>
+</div>
+
+
+    <!-- Row 3: Social Icons -->
+    <div class="flex justify-center space-x-6 mb-4">
+
+        
+      {% if footer.linkedin_url %}
+        <a href="{{ footer.linkedin_url }}"> {% image footer.linkedin_icon fill-50x50 %} </a>
+      {% endif %}
+      {% if footer.youtube_url %}
+        <a href="{{ footer.youtube_url }}">{% image footer.youtube_icon fill-50x50 %}</a>
+      {% endif %}
+      {% if footer.twitter_url %}
+        <a href="{{ footer.twitter_url }}">{% image footer.twitter_icon fill-50x50 %}</a>
+      {% endif %}
+
+    </div>
+
+    <!-- Row 4 -->
+    <div class="text-center text-xs text-gray-400">
+      {{ footer.copyright_text }}
+    </div>
+
+  </div>
+</footer>
+
+
+
+
+
+
+{% comment %} {% load wagtailsettings_tags static %}
+{% get_settings use_default_site=True as footer %}
+
+
+<footer class="bg-gray-900 text-white py-8">
+  <div class="container mx-auto px-4">
+    
+    <!-- Row 1 -->
+    <div class="flex flex-col md:flex-row justify-between mb-6 space-y-4 md:space-y-0">
+      <div><strong>Visit Us:</strong> {{ footer.visit_us }}</div>
+      <div><strong>Call Us:</strong> {{ footer.call_us }}</div>
+      <div><strong>Write to Us:</strong> {{ footer.write_to_us }}</div>
+    </div>
+
+    <!-- Row 2 -->
+    <div class="flex flex-col md:flex-row justify-between text-sm mb-6 space-y-2 md:space-y-0">
+      <div>{{ footer.intro }}</div>
+      <div class="space-x-4">
+        <a href="#" class="hover:text-gray-400">{{ footer.about }}</a>
+        <a href="#" class="hover:text-gray-400">{{ footer.reports }}</a>
+        <a href="#" class="hover:text-gray-400">{{ footer.faqs }}</a>
+      </div>
+    </div>
+
+    <!-- Row 3: Social Icons -->
+    <div class="flex justify-center space-x-6 mb-4">
+      {% if footer.facebook_url %}
+        <a href="{{ footer.facebook_url }}" target="_blank">
+          <img src="{% static 'icons/facebook.svg' %}" alt="Facebook" class="h-6 w-6">
+        </a>
+      {% endif %}
+      {% if footer.linkedin_url %}
+        <a href="{{ footer.linkedin_url }}" target="_blank">
+          <img src="{% static 'icons/linkedin.svg' %}" alt="LinkedIn" class="h-6 w-6">
+        </a>
+      {% endif %}
+      {% if footer.youtube_url %}
+        <a href="{{ footer.youtube_url }}" target="_blank">
+          <img src="{% static 'icons/youtube.svg' %}" alt="YouTube" class="h-6 w-6">
+        </a>
+      {% endif %}
+      {% if footer.twitter_url %}
+        <a href="{{ footer.twitter_url }}" target="_blank">
+          <img src="{% static 'icons/twitter.svg' %}" alt="Twitter" class="h-6 w-6">
+        </a>
+      {% endif %}
+      {% if footer.instagram_url %}
+        <a href="{{ footer.instagram_url }}" target="_blank">
+          <img src="{% static 'icons/instagram.svg' %}" alt="Instagram" class="h-6 w-6">
+        </a>
+      {% endif %}
+      {% if footer.snapchat_url %}
+        <a href="{{ footer.snapchat_url }}" target="_blank">
+          <img src="{% static 'icons/snapchat.svg' %}" alt="Snapchat" class="h-6 w-6">
+        </a>
+      {% endif %}
+    </div>
+
+    <!-- Row 4 -->
+    <div class="text-center text-xs text-gray-400">
+      COPYRIGHT © 2025 KUWAIT FINANCE HOUSE. ALL RIGHTS RESERVED
+    </div>
+  </div>
+</footer> 
+{% endcomment %} 

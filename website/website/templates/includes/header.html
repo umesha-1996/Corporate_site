@@ -1,0 +1,63 @@
+{% load static %}
+
+<header class="bg-white shadow sticky top-0 z-50">
+        <div class="container mx-auto">
+            <nav class="flex items-center justify-between px-4 py-10">
+
+                <img src="{% static 'images/sitelogo.png' %}" alt="KFH Logo" class="h-12 w-auto" />
+
+                <ul class="flex space-x-8 text-black font-medium">
+                    <li><a href="#" class="hover:text-red-600 transition">Personal Banking</a></li>
+                    <li><a href="#" class="hover:text-red-600 transition">Contact Us</a></li>
+                    <li><a href="#" class="hover:text-red-600 transition">Branch & ATM Locator</a></li>
+                    <ul class="flex space-x-8 text-black">
+
+<!-- Account Dropdown -->
+<li class="relative group">
+  <a href="#" class="hover:text-red-600 transition">Account</a>
+  
+  <!-- Dropdown Menu -->
+  <div class="absolute left-1/2 -translate-x-1/2 top-full mt-0 group-hover:block hidden bg-white shadow-lg rounded w-52 z-50">
+    <ul class="py-2 ">
+      <li><a href="#" class="block px-4 py-2 hover:bg-red-100">Gold Account</a></li>
+      <li><a href="#" class="block px-4 py-2 hover:bg-red-100">Saving Account</a></li>
+      <li><a href="#" class="block px-4 py-2 hover:bg-red-100">Electron Account</a></li>
+    </ul>
+  </div>
+</li>
+
+
+
+                      
+                       
+   <!-- Card Dropdown -->
+   <li class="relative group">
+    <a href="#" class="hover:text-red-600 transition">Card</a>
+
+    <div class="absolute left-1/2 -translate-x-1/2 top-full mt-0 group-hover:block hidden bg-white shadow-lg rounded w-52 z-50">
+      <ul class="py-2 ">
+        <li><a href="#" class="block px-4 py-2 hover:bg-red-100">Credit Card</a></li>
+        <li><a href="#" class="block px-4 py-2 hover:bg-red-100">HNB Travel Trip</a></li>
+      </ul>
+    </div>
+  </li>
+
+  <!-- Tools Dropdown -->
+  <li class="relative group">
+    <a href="#" class="hover:text-red-600 transition">Tools & Services</a>
+    
+    <ul class="absolute left-1/2 -translate-x-1/2 top-full mt-0 group-hover:block hidden bg-white shadow-lg rounded w-52 z-50">
+      <li><a href="#" class="block px-4 py-2 hover:bg-red-100">Calculator</a></li>
+      <li><a href="#" class="block px-4 py-2 hover:bg-red-100">Career</a></li>
+      <li><a href="#" class="block px-4 py-2 hover:bg-red-100">Currency Rate</a></li>
+    </ul>
+  </li>
+</ul>
+
+
+
+                    <li><a href="#" class="hover:text-red-600 transition">After Sales & Services</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
