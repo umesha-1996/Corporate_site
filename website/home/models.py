@@ -12,11 +12,6 @@ class HeroImageBlock(blocks.StructBlock):
     title = blocks.CharBlock(required=True)
     description = blocks.TextBlock(required=True)
 
-    class Meta:
-        template = "home/home_page_image_block.html"
-        icon = "image"
-        label = "Home Page Image With Text"
-
 class HomePage(Page): 
     home_page_images = StreamField(
         [
@@ -28,9 +23,13 @@ class HomePage(Page):
 
     tagline = RichTextField(blank=True, help_text="Company tagline or mission statement")
 
-    hero_images = StreamField([
-        ("image", ImageChooserBlock())
-    ], blank=True, use_json_field=True, help_text="Hero banner images")
+    hero_images = StreamField(
+        [
+            ("image", ImageChooserBlock())
+        ], 
+        blank=True, 
+        use_json_field=True, 
+        help_text="Hero banner images")
 
     who_we_are = StreamField([
         ("highlight", blocks.StructBlock([

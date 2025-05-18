@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load static wagtailcore_tags %}
+
+{% block content %}
+
+{% include 'partials/messages.html' %}
+
+
+<div class="max-w-6xl mx-auto px-4 py-12 bg-white shadow rounded grid grid-cols-1 md:grid-cols-2 gap-8">
+  
+  <!-- Left: YouTube Thumbnail -->
+  <div id="youtube-container" class="cursor-pointer" onclick="loadVideo(getYouTubeID('{{ page.youtube_url }}'))">
+    <img src="https://img.youtube.com/vi/{{ page.youtube_url|cut:'https://www.youtube.com/watch?v=' }}/0.jpg"
+         alt="YouTube Video Thumbnail"
+         class="rounded-lg shadow-lg w-full">
+  </div>
+
+  <!-- Right: Contact Form -->
+   <form method="POST" class="space-y-4">
+    {% csrf_token %}
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <input type="text" name="first_name" placeholder="First name (required)" required class="p-2 border rounded w-full">
+      <input type="text" name="last_name" placeholder="Last name (required)" required class="p-2 border rounded w-full">
+    </div>
+    <input type="tel" name="phone" placeholder="Phone number" required class="p-2 border rounded w-full">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <input type="text" name="extension" placeholder="Extension (optional)" class="p-2 border rounded w-full">
+      <input type="text" name="postal_code" placeholder="Postal code (optional)" class="p-2 border rounded w-full">
+    </div>
+    <input type="email" name="email" placeholder="Email (required)" required class="p-2 border rounded w-full">
+    <textarea name="message" placeholder="Message (required)" required class="p-2 border rounded w-full h-28"></textarea>
+    <button type="submit" class="bg-red-700 hover:bg-red-800 text-white font-semibold px-6 py-2 rounded">
+      Submit
+    </button>
+  </form> 
+
+
+
+  
+
+</div>
+
+<script>
+  function getYouTubeID(url) {
+    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=)([^#\&\?]*).*/;
+    const match = url.match(regExp);
+    return (match && match[2].length === 11) ? match[2] : null;
+  }
+
+  function loadVideo(videoId) {
+    const container = document.getElementById('youtube-container');
+    container.innerHTML = `
+      <iframe width="100%" height="315" 
+              src="https://www.youtube.com/embed/${videoId}?autoplay=1" 
+              frameborder="0" allowfullscreen></iframe>`;
+  }
+</script>
+{% endblock %}
