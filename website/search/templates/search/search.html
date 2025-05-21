@@ -1,38 +1,24 @@
 {% extends "base.html" %}
-{% load static wagtailcore_tags %}
-
-{% block body_class %}template-searchresults{% endblock %}
-
-{% block title %}Search{% endblock %}
-
 {% block content %}
-<h1>Search</h1>
-
-<form action="{% url 'search' %}" method="get">
-    <input type="text" name="query"{% if search_query %} value="{{ search_query }}"{% endif %}>
-    <input type="submit" value="Search" class="button">
-</form>
-
-{% if search_results %}
-<ul>
-    {% for result in search_results %}
-    <li>
-        <h4><a href="{% pageurl result %}">{{ result }}</a></h4>
-        {% if result.search_description %}
-        {{ result.search_description }}
-        {% endif %}
-    </li>
+<!-- Search Results -->
+<div class="p-6 space-y-6 max-w-4xl mx-auto min-h-[280px]">
+    {% for result in results %}
+    <div class="flex bg-white shadow rounded overflow-hidden">
+      {% if result.specific.specific.main_image %}
+        <img src="{{ result.specific.main_image.url }}" class="w-48 h-36 object-cover" alt="Image">
+      {% endif %}
+      <div class="p-4 flex flex-col justify-between">
+        <div>
+          <h2 class="font-semibold text-lg">{{ result.title }}</h2>
+          <p class="text-sm text-gray-700">{{ result.specific.content|truncatewords:30 }}</p>
+        </div>
+        <a href="{{ result.url }}" class="mt-2 self-start bg-red-700 text-white py-1 px-3 rounded hover:bg-red-800">
+          Read More
+        </a>
+      </div>
+    </div>
+    {% empty %}
+    <p>No results found.</p>
     {% endfor %}
-</ul>
-
-{% if search_results.has_previous %}
-<a href="{% url 'search' %}?query={{ search_query|urlencode }}&amp;page={{ search_results.previous_page_number }}">Previous</a>
-{% endif %}
-
-{% if search_results.has_next %}
-<a href="{% url 'search' %}?query={{ search_query|urlencode }}&amp;page={{ search_results.next_page_number }}">Next</a>
-{% endif %}
-{% elif search_query %}
-No results found
-{% endif %}
+  </div>
 {% endblock %}

@@ -4,8 +4,7 @@ from wagtail.fields import RichTextField, StreamField
 from wagtail.admin.panels import FieldPanel
 from wagtail import blocks
 from wagtail.images.blocks import ImageChooserBlock
-from wagtail.admin.panels import FieldPanel
-
+from wagtail.search import index
 
 class HeroImageBlock(blocks.StructBlock):
     image = ImageChooserBlock(required=True)
@@ -59,6 +58,7 @@ class HomePage(Page):
         ]))
     ], blank=True, use_json_field=True, help_text="Call-to-action buttons")
 
+
     content_panels = Page.content_panels + [
         FieldPanel("home_page_images"),
         FieldPanel("tagline"),
@@ -68,3 +68,14 @@ class HomePage(Page):
         FieldPanel("stats"),
         FieldPanel("cta"),
     ]
+
+    search_fields = Page.search_fields + [
+        # index.SearchField("tagline", partial_match=True),
+        index.AutocompleteField("tagline", partial_match=True),
+        index.AutocompleteField("who_we_are", partial_match=True),
+        index.AutocompleteField("highlights", partial_match=True),
+        index.AutocompleteField("stats", partial_match=True),
+        index.AutocompleteField("cta", partial_match=True),
+    ]
+
+    

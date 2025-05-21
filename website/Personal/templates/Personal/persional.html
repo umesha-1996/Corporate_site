@@ -1,0 +1,113 @@
+{% extends "base.html" %} {% load wagtailimages_tags %} {% block content %}
+{% load static %}
+
+<!-- Products Section -->
+<section class="bg-gray-50 h-[500px]">
+  <h2 class="text-4xl font-bold text-center mb-12 text-gray-800">
+    Our services and products
+  </h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto px-4">
+    {% for block in page.products %}
+      {% if block.block_type == 'product' %}
+        {% image block.value.product_image original as img %}
+        <a href="{{ block.value.product_url }}">
+<div class="flex items-center gap-6 bg-white p-8 rounded-2xl shadow hover:shadow-xl transition-shadow w-full">
+  <img src="{{ img.url }}" alt="{{ block.value.product_name }}" class="w-16 h-16" />
+  <span class="text-2xl font-semibold text-gray-800 text-center w-full">
+    {{ block.value.product_name }}
+  </span>
+</div>
+</a>
+      {% endif %}
+    {% endfor %}
+  </div>
+</section>
+
+
+
+
+<!-- Cards Section -->
+<section class="bg-gray-50 w-full">
+  <h2 class="text-4xl font-bold text-center mb-12 text-gray-800">
+    Card Offers
+  </h2>
+
+  <div class="grid grid-cols-1 gap-8 w-full">
+    {% for block in page.cards %}
+      {% if block.block_type == 'card' %}
+        {% image block.value.card_image original as card_img %}
+
+        <!-- Determine the layout direction -->
+        {% if forloop.counter|divisibleby:"2" %}
+          <!-- Even items: Image on right -->
+          <div class="flex flex-col md:flex-row-reverse bg-white shadow-md rounded-lg overflow-hidden w-full">
+        {% else %}
+          <!-- Odd items: Image on left -->
+          <div class="flex flex-col md:flex-row bg-white shadow-md rounded-lg overflow-hidden w-full">
+        {% endif %}
+        
+          <!-- Image -->
+          <div class="md:w-1/2 flex-shrink-0">
+            <img
+              src="{{ card_img.url }}"
+              alt="{{ block.value.card_title }}"
+              class="w-full h-full object-cover"
+            />
+          </div>
+
+          <!-- Text -->
+          <div class="md:w-1/2 p-10 flex flex-col justify-center text-center">
+            <h2 class="text-3xl font-semibold mb-6 text-gray-800">
+              {{ block.value.card_title }}
+            </h2>
+            <p class="text-lg text-gray-600 mb-8">
+              {{ block.value.card_description }}
+            </p>
+            <a
+              href="{{ block.value.card_url }}"
+              class="bg-red-800 text-white px-6 py-3 rounded-full font-semibold shadow hover:bg-red-700 transition-colors inline-block mx-auto"
+            >
+              Learn more
+            </a>
+          </div>
+
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</section>
+
+
+
+<!-- Products Section -->
+<section class="bg-gray-50 my-8 p-10 h-[500px]">
+  <h2 class="text-4xl font-bold text-center mb-12 text-gray-800">
+    A collection of services and tools to meet your requirements
+  </h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto px-4">
+    {% for block in page.announcements %}
+      {% if block.block_type == 'announcement' %}
+        {% image block.value.announcement_image original as img %}
+
+        <div class="flex items-center gap-6 bg-white p-8 rounded-2xl shadow hover:shadow-xl transition-all duration-300 ease-in-out transform hover:-translate-y-1 w-full">
+  <img src="{{ img.url }}" alt="{{ block.value.announcement }}" class="w-16 h-16" />
+  
+  <span class="text-2xl font-semibold text-gray-800 text-center w-full">
+    {{ block.value.announcement }}
+  </span>
+
+  <a href="{{ block.value.button_url }}" target="_blank">
+    <button class="w-12 h-12 flex items-center justify-center rounded-full border border-gray-300 bg-red-100 shadow hover:shadow-md text-red-600 transition-all duration-300 ease-in-out">
+      <img src="{% static 'images/icon-arrow.png' %}" alt="Icon" class="w-6 h-6" />
+    </button>
+  </a>
+</div>
+
+
+      {% endif %}
+    {% endfor %}
+  </div>
+</section>
+
+
+{% endblock %}

@@ -1,63 +1,180 @@
 {% load static %}
 
 <header class="bg-white shadow sticky top-0 z-50">
-        <div class="container mx-auto">
-            <nav class="flex items-center justify-between px-4 py-10">
-<a href="/">
-                <img src="{% static 'images/sitelogo.png' %}" alt="KFH Logo" class="h-12 w-auto" />
-</a>
-                <ul class="flex space-x-8 text-black font-medium">
-                    <li><a href="#" class="hover:text-red-600 transition">Personal Banking</a></li>
-                    <li><a href="/contact-us-page/" class="hover:text-red-600 transition">Contact Us</a></li>
-                    <li><a href="#" class="hover:text-red-600 transition">Branch & ATM Locator</a></li>
-                    <ul class="flex space-x-8 text-black">
+  <div class="container mx-auto">
+    <nav class="flex items-center justify-between px-4 py-10">
+      <a href="/">
+        <img
+          src="{% static 'images/sitelogo.png' %}"
+          alt="KFH Logo"
+          class="h-12 w-auto"
+        />
+      </a>
 
-<!-- Account Dropdown -->
-<li class="relative group">
-  <a href="#" class="hover:text-red-600 transition">Account</a>
-  
-  <!-- Dropdown Menu -->
-  <div class="absolute left-1/2 -translate-x-1/2 top-full mt-0 group-hover:block hidden bg-white shadow-lg rounded w-52 z-50">
-    <ul class="py-2 ">
-      <li><a href="#" class="block px-4 py-2 hover:bg-red-100">Gold Account</a></li>
-      <li><a href="#" class="block px-4 py-2 hover:bg-red-100">Saving Account</a></li>
-      <li><a href="#" class="block px-4 py-2 hover:bg-red-100">Electron Account</a></li>
-    </ul>
-  </div>
-</li>
+      <ul class="flex space-x-8 text-black font-medium ml-8">
+        <li>
+          <a href="/personal-page/" class="hover:text-red-600 transition">Personal Banking</a>
+        </li>
+        <li>
+          <a href="/contact-us-page/" class="hover:text-red-600 transition"
+            >Contact Us</a
+          >
+        </li>
+        <li>
+          <a href="#" class="hover:text-red-600 transition"
+            >Branch & ATM Locator</a
+          >
+        </li>
+        <ul class="flex space-x-8 text-black">
+          <!-- Account Dropdown -->
+          <li class="relative group">
+            <a href="#" class="hover:text-red-600 transition">Account</a>
 
+            <!-- Dropdown Menu -->
+            <div
+              class="absolute left-1/2 -translate-x-1/2 top-full mt-0 group-hover:block hidden bg-white shadow-lg rounded w-52 z-50"
+            >
+              <ul class="py-2">
+                <li>
+                  <a href="#" class="block px-4 py-2 hover:bg-red-100"
+                    >Gold Account</a
+                  >
+                </li>
+                <li>
+                  <a href="#" class="block px-4 py-2 hover:bg-red-100"
+                    >Saving Account</a
+                  >
+                </li>
+                <li>
+                  <a href="#" class="block px-4 py-2 hover:bg-red-100"
+                    >Electron Account</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </li>
 
+          <!-- Card Dropdown -->
+          <li class="relative group">
+            <a href="#" class="hover:text-red-600 transition">Card</a>
 
-                      
-                       
-   <!-- Card Dropdown -->
-   <li class="relative group">
-    <a href="#" class="hover:text-red-600 transition">Card</a>
+            <div
+              class="absolute left-1/2 -translate-x-1/2 top-full mt-0 group-hover:block hidden bg-white shadow-lg rounded w-52 z-50"
+            >
+              <ul class="py-2">
+                <li>
+                  <a href="#" class="block px-4 py-2 hover:bg-red-100"
+                    >Credit Card</a
+                  >
+                </li>
+                <li>
+                  <a href="#" class="block px-4 py-2 hover:bg-red-100"
+                    >HNB Travel Trip</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </li>
 
-    <div class="absolute left-1/2 -translate-x-1/2 top-full mt-0 group-hover:block hidden bg-white shadow-lg rounded w-52 z-50">
-      <ul class="py-2 ">
-        <li><a href="#" class="block px-4 py-2 hover:bg-red-100">Credit Card</a></li>
-        <li><a href="#" class="block px-4 py-2 hover:bg-red-100">HNB Travel Trip</a></li>
+          <!-- Tools Dropdown -->
+          <li class="relative group">
+            <a href="#" class="hover:text-red-600 transition"
+              >Tools & Services</a
+            >
+
+            <ul
+              class="absolute left-1/2 -translate-x-1/2 top-full mt-0 group-hover:block hidden bg-white shadow-lg rounded w-52 z-50"
+            >
+              <li>
+                <a href="#" class="block px-4 py-2 hover:bg-red-100"
+                  >Calculator</a
+                >
+              </li>
+              <li>
+                <a href="#" class="block px-4 py-2 hover:bg-red-100">Career</a>
+              </li>
+              <li>
+                <a href="#" class="block px-4 py-2 hover:bg-red-100"
+                  >Currency Rate</a
+                >
+              </li>
+            </ul>
+          </li>
+        </ul>
+
+        <li>
+          <a href="#" class="hover:text-red-600 transition"
+            >After Sales & Services</a
+          >
+        </li>
+
+        <!-- Language and Search Section -->
+        <li>
+          <div class="flex items-center gap-2 ml-4" x-data="{ open: false }">
+            <!-- Translate Button -->
+            <form method="post" action="/i18n/setlang/">
+              {% csrf_token %}
+              <input type="hidden" name="next" value="{{ request.path }}" />
+              <input
+                type="hidden"
+                name="language"
+                value="{% if LANGUAGE_CODE == 'en' %}ar{% else %}en{% endif %}"
+              />
+
+              <button
+                type="submit"
+                class="w-10 h-10 flex items-center justify-center border border-gray-300 bg-white shadow hover:shadow-md transition text-red-600 text-lg font-bold rounded-md"
+                aria-label="Switch Language"
+              >
+                {% if LANGUAGE_CODE == 'en' %} ع {% else %} E {% endif %}
+              </button>
+            </form>
+
+            <!-- Search Button  -->
+            <div class="relative flex items-center" x-data="{ open: false }">
+             
+              <button
+                @click="open = !open"
+                class="w-10 h-10 flex items-center justify-center rounded-full border border-gray-300 bg-white shadow hover:shadow-md transition text-red-600"
+                aria-label="Search"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M21 21l-4.35-4.35M10 18a8 8 0 100-16 8 8 0 000 16z"
+                  />
+                </svg>
+              </button>
+
+             
+              <form
+                x-show="open"
+                x-transition
+                @click.away="open = false"
+                method="get"
+                action="{% url 'global_search' %}"
+                class="ml-2"
+              >
+                <input
+                  type="text"
+                  name="query"
+                  class="px-3 py-2 w-48 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-red-500 transition"
+                  placeholder="Search..."
+                  value="{{ request.GET.query|default:'' }}"
+                />
+              </form>
+            </div>
+          </div>
+        </li>
       </ul>
-    </div>
-  </li>
-
-  <!-- Tools Dropdown -->
-  <li class="relative group">
-    <a href="#" class="hover:text-red-600 transition">Tools & Services</a>
-    
-    <ul class="absolute left-1/2 -translate-x-1/2 top-full mt-0 group-hover:block hidden bg-white shadow-lg rounded w-52 z-50">
-      <li><a href="#" class="block px-4 py-2 hover:bg-red-100">Calculator</a></li>
-      <li><a href="#" class="block px-4 py-2 hover:bg-red-100">Career</a></li>
-      <li><a href="#" class="block px-4 py-2 hover:bg-red-100">Currency Rate</a></li>
-    </ul>
-  </li>
-</ul>
-
-
-
-                    <li><a href="#" class="hover:text-red-600 transition">After Sales & Services</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+    </nav>
+  </div>
+</header>

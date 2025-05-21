@@ -25,6 +25,7 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 
 INSTALLED_APPS = [
     "ContactUs",
+    "Personal",
     "base",
     "home",
     "search",
@@ -167,11 +168,54 @@ WAGTAIL_SITE_NAME = "website"
 
 # Search
 # https://docs.wagtail.org/en/stable/topics/search/backends.html
+# WAGTAILSEARCH_BACKENDS = {
+#     'default': {
+#         'BACKEND': 'wagtail.search.backends.elasticsearch8',
+#         'URLS': ['http://localhost:9200'],
+#         'INDEX': 'your_project_index',
+#         'TIMEOUT': 5,
+#     }
+# }
+
+
 WAGTAILSEARCH_BACKENDS = {
-    "default": {
-        "BACKEND": "wagtail.search.backends.database",
+    'default': {
+        'BACKEND': 'wagtail.search.backends.elasticsearch8', 
+        'URLS': ['http://localhost:9200'],
+        'INDEX': 'website_index',
+        'TIMEOUT': 5,
+        'INDEX_SETTINGS': {
+            "settings": {  
+                "analysis": {
+                    "analyzer": {
+                        "autocomplete": {
+                            "type": "custom",
+                            "tokenizer": "autocomplete_tokenizer",
+                            "filter": ["lowercase"]
+                        },
+                        "autocomplete_search": {
+                            "type": "custom",
+                            "tokenizer": "lowercase"
+                        }
+                    },
+                    "tokenizer": {
+                        "autocomplete_tokenizer": {
+                            "type": "edge_ngram",
+                            "min_gram": 2,
+                            "max_gram": 20,
+                            "token_chars": ["letter"]
+                        }
+                    }
+                }
+            }
+        },
+        'OPTIONS': {}
     }
 }
+
+
+
+
 
 # Base URL to use when referring to full URLs within the Wagtail admin backend -
 # e.g. in notification emails. Don't include '/admin' or a trailing slash

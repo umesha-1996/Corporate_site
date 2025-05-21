@@ -1,0 +1,7 @@
+Requirement already satisfied: elasticsearch in e:\my\mysampleprojects\python\wagtail\my_site\venv\lib\site-packages (8.18.1)
+Requirement already satisfied: elastic-transport<9,>=8.15.1 in e:\my\mysampleprojects\python\wagtail\my_site\venv\lib\site-packages (from elasticsearch) (8.17.1)
+Requirement already satisfied: python-dateutil in e:\my\mysampleprojects\python\wagtail\my_site\venv\lib\site-packages (from elasticsearch) (2.9.0.post0)
+Requirement already satisfied: typing-extensions in e:\my\mysampleprojects\python\wagtail\my_site\venv\lib\site-packages (from elasticsearch) (4.13.2)
+Requirement already satisfied: urllib3<3,>=1.26.2 in e:\my\mysampleprojects\python\wagtail\my_site\venv\lib\site-packages (from elastic-transport<9,>=8.15.1->elasticsearch) (2.4.0)
+Requirement already satisfied: certifi in e:\my\mysampleprojects\python\wagtail\my_site\venv\lib\site-packages (from elastic-transport<9,>=8.15.1->elasticsearch) (2025.4.26)
+Requirement already satisfied: six>=1.5 in e:\my\mysampleprojects\python\wagtail\my_site\venv\lib\site-packages (from python-dateutil->elasticsearch) (1.17.0)
