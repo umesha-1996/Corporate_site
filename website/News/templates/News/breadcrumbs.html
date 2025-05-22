@@ -1,0 +1,18 @@
+{% load wagtailcore_tags %}
+
+<nav class="flex text-gray-500 text-sm mb-6" aria-label="Breadcrumb">
+  <ol class="inline-flex items-center space-x-1">
+    {% for ancestor in page.get_ancestors %}
+      {% if not ancestor.is_root %}
+        <li class="inline-flex items-center">
+          <a href="{{ ancestor.url }}" class="hover:underline text-blue-600">{{ ancestor.title }}</a>
+          <span class="mx-2 text-gray-400">/</span>
+        </li>
+      {% endif %}
+    {% endfor %}
+    <li class="text-gray-700 font-medium">{{ page.title }}</li>
+  </ol>
+</nav>
+
+
+
