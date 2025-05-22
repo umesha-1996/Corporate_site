@@ -1,9 +1,9 @@
-{% extends "base.html" %} {% load wagtailimages_tags %} {% block content %}
+{% extends "base.html" %} {% load wagtailcore_tags wagtailimages_tags %} {% block content %}
 {% load static %}
 
 <!-- Products Section -->
 <section class="bg-gray-50 h-[500px]">
-  <h2 class="text-4xl font-bold text-center mb-12 text-gray-800">
+  <h2 class="text-4xl font-bold text-center py-8 mb-12 text-gray-800">
     Our services and products
   </h2>
   <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto px-4">
@@ -107,6 +107,12 @@
       {% endif %}
     {% endfor %}
   </div>
+</section>
+
+
+<!-- News Section -->
+<section class="bg-gray-50 my-8 p-10 h-[500px]">
+{% include "News/news_index.html" %}
 </section>
 
 
