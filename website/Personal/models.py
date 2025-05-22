@@ -29,7 +29,7 @@ class persional(Page):
 
         news_index = NewsIndexPage.objects.live().first()
         if news_index:
-            news_items = [page.specific for page in news_index.get_children().live().order_by('-first_published_at')[:3]]
+            news_items = [page.specific for page in news_index.get_children().live().order_by('-first_published_at')[:4]]
         else:
             news_items = []
 
