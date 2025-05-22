@@ -30,7 +30,7 @@ The following features are either implemented or planned as part of the complete
 | 📰 News, Updates & Blog | ⏳ Coming Soon |
 | 📂 Document Downloads | ⏳ Coming Soon |
 | 🗺️ Contact & Location Details | ⏳ Coming Soon |
-| 🔍 Search & Navigation | ⏳ Coming Soon |
+| 🔍 Search & Navigation | ✅ Done |
 | 🌐 Multi-language Support | ⏳ Coming Soon |
 
 ---
