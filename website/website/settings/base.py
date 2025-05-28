@@ -24,6 +24,7 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 # Application definition
 
 INSTALLED_APPS = [
+    "visitus",
     "News",
     "ContactUs",
     "Personal",
@@ -166,17 +167,6 @@ STORAGES = {
 # Wagtail settings
 
 WAGTAIL_SITE_NAME = "website"
-
-# Search
-# https://docs.wagtail.org/en/stable/topics/search/backends.html
-# WAGTAILSEARCH_BACKENDS = {
-#     'default': {
-#         'BACKEND': 'wagtail.search.backends.elasticsearch8',
-#         'URLS': ['http://localhost:9200'],
-#         'INDEX': 'your_project_index',
-#         'TIMEOUT': 5,
-#     }
-# }
 
 
 WAGTAILSEARCH_BACKENDS = {

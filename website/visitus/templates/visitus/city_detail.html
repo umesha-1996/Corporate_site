@@ -1,0 +1,91 @@
+{% load wagtailcore_tags %}
+
+<div class="space-y-8">
+  <h2 class="text-2xl font-semibold text-red-700 border-b pb-2 mb-4">
+    CICB LOCATIONS - {{ city.city_name }}
+  </h2>
+
+  {% if citytype == 'branch' %} 
+
+ 
+  <div class="border border-gray-200 rounded-lg overflow-hidden shadow-sm">
+     {% for location in city.locations.all %}
+    <!-- Branch Title -->
+    <div class="bg-gray-100 px-4 py-2 text-lg font-semibold text-gray-800">
+      {{ location.title }}
+    </div>
+
+    <!-- Table Header -->
+    <div
+      class="grid grid-cols-5 sm:grid-cols-6 bg-red-700 text-white text-sm font-medium text-center"
+    >
+      <div class="py-2 border-r border-white">Ladies Section</div>
+      <div class="py-2 border-r border-white">ATM Machines</div>
+      <div class="py-2 border-r border-white">Contact Number</div>
+      <div class="py-2 border-r border-white">Open</div>
+      <div class="py-2 border-r border-white">Close</div>
+    </div>
+
+    <!-- Table Body -->
+    <div
+      class="grid grid-cols-5 sm:grid-cols-6 text-center text-sm text-gray-700"
+    >
+      <div class="py-2 border-t">
+        {% if location.is_available_ladies_section == True %} Available {% else %} Unavailble {% endif %}
+      </div>
+      <div class="py-2 border-t">
+        {{ location.atm_machine_count|default:"-" }}
+      </div>
+      <div class="py-2 border-t">{{ location.phone|default:"-" }}</div>
+      <div class="py-2 border-t">{{ location.opening_time|default:"-" }}</div>
+      <div class="py-2 border-t">{{ location.close_time|default:"-" }}</div>
+      <div class="py-2 border-t">
+        <a
+          href="https://maps.google.com/?q={{ location.latitude }},{{ location.longitude }}"
+          target="_blank"
+          class="text-red-600 underline hover:text-red-800"
+        >
+          CLICK HERE
+        </a>
+      </div>
+    </div>
+ 
+  {% empty %}
+  <p class="text-gray-500">No branch locations available for this city.</p>
+  {% endfor %}
+ </div>
+
+{% elif citytype == 'atm' %}
+
+  <ul class="space-y-3">
+    {% for location in city.locations.all %}
+<li class="bg-white p-4 rounded-lg shadow hover:shadow-md transition">
+  <div class="flex items-center justify-between">
+    <h3 class="text-lg font-medium text-gray-800">{{ location.title }}</h3>
+    <button
+      onclick="window.open('https://maps.google.com/?q={{ location.latitude }},{{ location.longitude }}', '_blank')"
+      class="bg-red-600 text-white text-sm px-4 py-2 rounded hover:bg-red-700 transition ml-4"
+    >
+      View on Map
+    </button>
+  </div>
+</li>
+
+    {% empty %}
+    <li class="text-gray-500">
+      No ATM locations available for this city.
+    </li>
+    {% endfor %}
+  </ul>
+
+
+{% else %}
+
+<ul class="space-y-3">
+  <li class="text-gray-500">
+    No ATM/branch locations available for this city.
+  </li>
+</ul>
+
+{% endif %}
+</div>

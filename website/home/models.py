@@ -69,12 +69,12 @@ class HomePage(Page):
     ]
 
     search_fields = Page.search_fields + [
-        # index.SearchField("tagline", partial_match=True),
         index.AutocompleteField("tagline", partial_match=True),
         index.AutocompleteField("who_we_are", partial_match=True),
         index.AutocompleteField("highlights", partial_match=True),
         index.AutocompleteField("stats", partial_match=True),
         index.AutocompleteField("cta", partial_match=True),
     ]
+
 
     
