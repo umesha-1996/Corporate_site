@@ -4,7 +4,7 @@ from wagtail.admin.panels import FieldPanel
 from wagtail.admin.panels import (
     FieldPanel,
 )
-from wagtail.models import Page
+from wagtail.models import TranslatableMixin, Page
 from django.contrib import messages
 from django.shortcuts import render, redirect
 

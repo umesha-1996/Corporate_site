@@ -6,7 +6,7 @@ from wagtail.snippets.models import register_snippet
 from wagtail.search import index
 from django.core.paginator import Paginator
 from django.utils.timezone import now
-from wagtail.models import Page
+from wagtail.models import TranslatableMixin,Page
 
 @register_snippet
 class NewsCategory(models.Model):

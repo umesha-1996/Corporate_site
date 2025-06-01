@@ -1,5 +1,5 @@
 from django.db import models
-from wagtail.models import Page
+from wagtail.models import TranslatableMixin,Page
 from wagtail.admin.panels import FieldPanel, InlinePanel, MultiFieldPanel
 from wagtail.fields import RichTextField
 from modelcluster.fields import ParentalKey

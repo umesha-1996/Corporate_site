@@ -24,6 +24,7 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 # Application definition
 
 INSTALLED_APPS = [
+    # custom apps
     "visitus",
     "News",
     "ContactUs",
@@ -31,17 +32,22 @@ INSTALLED_APPS = [
     "base",
     "home",
     "search",
+
+    # Wagtail Apps 
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
     "wagtail.embeds",
     "wagtail.sites",
+    'wagtail.locales', 
     "wagtail.users",
     "wagtail.snippets",
     "wagtail.documents",
     "wagtail.images",
     "wagtail.search",
     "wagtail.admin",
-    "wagtail",
+    "wagtail", 
+
+    # Django Apps
     "modelcluster",
     "taggit",
     "django.contrib.admin",
@@ -54,14 +60,15 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    "django.middleware.security.SecurityMiddleware", 
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
+    'django.middleware.locale.LocaleMiddleware', 
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "django.middleware.security.SecurityMiddleware",
-    "wagtail.contrib.redirects.middleware.RedirectMiddleware",
+    "wagtail.contrib.redirects.middleware.RedirectMiddleware", 
 ]
 
 ROOT_URLCONF = "website.urls"
@@ -126,8 +133,31 @@ LANGUAGE_CODE = "en-us"
 TIME_ZONE = "UTC"
 
 USE_I18N = True
-
+USE_L10N = True
 USE_TZ = True
+
+WAGTAIL_I18N_ENABLED = True
+
+LANGUAGES = [
+    ('en-us', 'English'),
+    ('en', 'English (Standard)'),
+    ('ar', 'Arabic'),
+]
+
+WAGTAIL_CONTENT_LANGUAGES = LANGUAGES
+
+LANGUAGE_BIDI = True
+
+# WAGTAIL_CONTENT_LANGUAGES = LANGUAGES = [
+#     ('en-us', "English"),
+#     ('fr', "French"),
+#     ('es', "Spanish"),
+#     ('ar', 'Arabic'),
+# ]
+
+LOCALE_PATHS = [
+    os.path.join(BASE_DIR, 'locale'),
+]
 
 
 # Static files (CSS, JavaScript, Images)

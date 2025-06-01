@@ -1,4 +1,4 @@
-from wagtail.models import Page
+from wagtail.models import TranslatableMixin,Page
 from wagtail.fields import RichTextField, StreamField
 from wagtail.admin.panels import FieldPanel
 from wagtail import blocks
@@ -75,6 +75,5 @@ class HomePage(Page):
         index.AutocompleteField("stats", partial_match=True),
         index.AutocompleteField("cta", partial_match=True),
     ]
-
 
     

@@ -1,5 +1,5 @@
 from django.db import models
-from wagtail.models import Page
+from wagtail.models import TranslatableMixin,Page
 from wagtail import blocks
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.fields import StreamField
