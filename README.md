@@ -27,9 +27,9 @@ The following features are either implemented or planned as part of the complete
 | 🏦 Clear Service Offerings | ⏳ Coming Soon |
 | 📞 Strong Call-to-Actions (CTAs) | ⏳ Coming Soon |
 | 💼 About the Company | ⏳ Coming Soon |
-| 📰 News, Updates & Blog | ⏳ Coming Soon |
+| 📰 News, Updates & Blog | ✅ Done |
 | 📂 Document Downloads | ⏳ Coming Soon |
-| 🗺️ Contact & Location Details | ⏳ Coming Soon |
+| 🗺️ Contact & Location Details | ✅ Done |
 | 🔍 Search & Navigation | ✅ Done |
 | 🌐 Multi-language Support | ⏳ Coming Soon |
 
