@@ -81,12 +81,6 @@ class NewsPage(Page):
         related_name='+'
     )
 
-
-    search_fields = Page.search_fields + [
-        index.AutocompleteField("short_title", partial_match=True),
-        index.AutocompleteField("body", partial_match=True)
-    ]
-
     content_panels = Page.content_panels + [
         FieldPanel('date'),
         FieldPanel('category'),
@@ -95,3 +89,9 @@ class NewsPage(Page):
         FieldPanel('image'),
     ]
 
+    search_fields = Page.search_fields + [
+        index.AutocompleteField("date", partial_match=True),
+        index.AutocompleteField("category", partial_match=True),
+        index.AutocompleteField("short_title", partial_match=True),
+        index.AutocompleteField("body", partial_match=True)
+    ]

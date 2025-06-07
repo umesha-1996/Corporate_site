@@ -1,0 +1,78 @@
+{% extends "base.html" %} {% load static wagtailcore_tags wagtailimages_tags %}
+{% block content %}
+
+<div class="container mx-auto py-0">
+  <div class="min-h-[1000px] bg-white flex items-center justify-center">
+    <div class="text-center px-4">
+      <!-- Gold Icon -->
+      <img
+        src="{% static 'images/icon-account.png' %}"
+        alt="Gold Icon"
+        class="mx-auto w-28 h-28 mb-6"
+      />
+
+      <!-- Page Title -->
+      <h1 class="text-9xl font-extrabold text-red-600 mb-12">
+        {{ page.title }}
+      </h1>
+
+      <!-- Gold Types -->
+      <div class="flex justify-center gap-16 flex-wrap">
+        {% for child in page.get_children.live %} {% with child.specific as gold %}
+        <div class="text-center">
+          <h2 class="text-5xl font-bold text-red-800 mb-2">
+            {{ gold.short_title }}
+          </h2>
+          <h3 class="text-4xl text-gray-700 uppercase tracking-wider">
+            FINE GOLD {{ gold.price }}
+          </h3>
+        </div>
+        {% endwith %} {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  {% include "News/breadcrumbs.html" %}
+
+  <div class="grid grid-cols-1 gap-12 max-w-9xl mx-auto py-12">
+  {% for child in page.get_children.live %}
+    {% with child.specific as gold_page %}
+      <div class="flex flex-col md:flex-row {% if forloop.counter|divisibleby:'2' %}md:flex-row-reverse{% endif %} bg-white shadow-lg rounded-xl overflow-hidden min-h-[320px]">
+
+        <!-- Left: Icon and summary -->
+        <div class="md:w-1/2 flex flex-col items-center justify-center bg-gray-50 p-6">
+          {% image gold_page.gold_account_icon original as gold_img %}
+          <img src="{{ gold_img.url }}" alt="{{ gold_page.short_title }}" class="w-20 h-20 mb-4">
+
+          <h1 class="text-4xl font-extrabold text-red-600 mb-4">{{ page.title }}</h1>
+
+          <div class="flex justify-center gap-10 flex-wrap">
+            {% for child2 in page.get_children.live %}
+              {% with child2.specific as gold %}
+                <div class="text-center">
+                  <h2 class="text-lg font-bold text-red-800">{{ gold.short_title }}</h2>
+                  <p class="text-gray-600 text-sm uppercase tracking-wide">FINE GOLD {{ gold.price }}</p>
+                </div>
+              {% endwith %}
+            {% endfor %}
+          </div>
+        </div>
+
+        <!-- Right: Info and CTA -->
+        <div class="md:w-1/2 p-8 flex flex-col justify-center items-center text-center">
+          <h2 class="text-2xl font-semibold text-red-800">{{ gold_page.short_title }}</h2>
+          <p class="text-gray-600 mt-2 mb-6">Purity percentage of {{ gold_page.price }}</p>
+          <a href="{{ gold_page.url }}" class="bg-red-700 text-white px-6 py-2 hover:bg-red-600 transition-all duration-300">
+            More Details
+          </a>
+        </div>
+
+      </div>
+    {% endwith %}
+  {% endfor %}
+</div>
+
+
+    {% endblock %}
+  </div>
+</div>

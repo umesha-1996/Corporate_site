@@ -4,7 +4,7 @@ from wagtail import blocks
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.fields import StreamField
 from wagtail.admin.panels import FieldPanel
-
+from wagtail.search import index
 from News.models import NewsIndexPage
 
 class product_block(blocks.StructBlock):
@@ -64,6 +64,12 @@ class persional(Page):
         FieldPanel("products"),
         FieldPanel("cards"),
         FieldPanel("announcements")
+    ]
+
+    search_fields = Page.search_fields + [
+        index.AutocompleteField("products", partial_match=True),
+        index.AutocompleteField("cards", partial_match=True),
+        index.AutocompleteField("announcements", partial_match=True)
     ]
 
     

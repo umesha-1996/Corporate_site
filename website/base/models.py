@@ -1,14 +1,12 @@
 from wagtail.snippets.models import register_snippet
 from wagtail.admin.panels import FieldPanel
 from django.db import models
-from wagtail.models import (
-    TranslatableMixin,
-)
+
 from wagtail.fields import StreamField
 from wagtail import blocks
 
 @register_snippet
-class Footer(TranslatableMixin, models.Model):
+class Footer(models.Model):
     # Row 1
     logo = models.ForeignKey(
         "wagtailimages.Image",
@@ -100,6 +98,7 @@ class Footer(TranslatableMixin, models.Model):
         max_length=255
     )
 
+# which fields appear in the Wagtail admin
     panels = [
         FieldPanel("logo"),
         FieldPanel("visit_us_icon"),
@@ -123,8 +122,8 @@ class Footer(TranslatableMixin, models.Model):
 
     # api snipeet ekkne dala thiyenne, admin panel eke snippet menu ek click krama model name eka penwana nama (verbose_name_plural)
     # translation 
-    class Meta(TranslatableMixin.Meta):
-        verbose_name_plural = "footer"
+    # class Meta(TranslatableMixin.Meta):
+    #     verbose_name_plural = "footer"
         
     # table ekt record ekk danmame record ek penwan thana (table eke), mokkd penwanna ona nama.
     def __str__(self):
