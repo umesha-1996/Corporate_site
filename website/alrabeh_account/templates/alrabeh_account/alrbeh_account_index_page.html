@@ -1,0 +1,111 @@
+{% extends "base.html" %} {% load static wagtailcore_tags wagtailimages_tags %}
+{% block content %}
+
+<div class="container mx-auto p-6">
+
+
+  {% include "News/breadcrumbs.html" %}
+
+    <div class="text-center mb-12">
+    <h2 class="text-3xl font-bold text-gray-800">{{ page.mani_title }}</h2>
+    <p class="text-xl text-red-600 font-semibold mt-2">{{ page.short_description }}</p>
+  </div>
+
+
+<div class="grid grid-cols-1 gap-12 max-w-7xl mx-auto py-12 px-4">
+  {% for child in page.get_children.live %}
+    <div class="flex flex-col md:flex-row {% if forloop.counter|divisibleby:'2' %}md:flex-row-reverse{% endif %} bg-white shadow-lg rounded-xl overflow-hidden min-h-[350px]">
+
+      <!-- Left -->
+      <div class="md:w-1/2 h-[300px] md:h-auto">
+        {% image child.specific.image width-800 as img %}
+        {% if img %}
+          <img src="{{ img.url }}" alt="{{ child.specific.short_title }}" class="w-full h-full object-cover">
+        {% else %}
+          <div class="w-full h-full flex items-center justify-center bg-gray-300 text-gray-500 text-lg italic">
+            No image available
+          </div>
+        {% endif %}
+      </div>
+
+      <!-- Right -->
+<div class="md:w-1/2 p-8 flex flex-col justify-center">
+  <h2 class="text-2xl font-bold text-red-800 mb-4">{{ child.specific.short_title }}</h2>
+  
+  <p class="text-gray-700 text-base leading-relaxed mb-4">
+    {{ child.specific.body|richtext|striptags|truncatechars:100 }}
+  </p>
+  
+  <a href="{{ child.specific.url }}" 
+     class="self-start inline-block bg-red-700 text-white text-sm font-medium px-4 py-2 shadow hover:bg-red-600 transition duration-300">
+    More Details
+  </a>
+</div>
+
+
+
+    </div>
+  {% endfor %}
+</div>
+
+
+</div>
+<!-- Tab Section -->
+<section class="bg-gray-100 py-10">
+  <div class="max-w-7xl mx-auto px-4">
+    <!-- Tabs -->
+    <div class="flex flex-wrap border-b border-gray-300 text-sm mb-4">
+      {% for feature in page.account_features.all %}
+      <button
+        onclick="switchTab({{ forloop.counter0 }})"
+        class="tab-button py-2 px-4 text-gray-600 hover:text-red-700 border-b-2 border-transparent font-medium transition"
+      >
+        {{ feature.title }}
+      </button>
+      {% endfor %}
+    </div>
+
+    <!-- Tab Contents -->
+    <div>
+      {% for feature in page.account_features.all %}
+      <div class="tab-content hidden" id="tab-{{ forloop.counter0 }}">
+        <div class="bg-white shadow p-6 rounded-lg">
+          <ul class="list-disc list-inside text-sm text-gray-700">
+            {% for desc in feature.feature_descriptions.all %}
+            <li>{{ desc.description }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- Tab -->
+<script>
+  function switchTab(index) {
+    const tabs = document.querySelectorAll(".tab-content");
+    const buttons = document.querySelectorAll(".tab-button");
+
+    tabs.forEach((tab, i) => {
+      tab.classList.toggle("hidden", i !== index);
+    });
+
+    buttons.forEach((btn, i) => {
+      btn.classList.toggle("border-red-600", i === index);
+      btn.classList.toggle("text-red-700", i === index);
+    });
+  }
+
+  // Show first tab by default
+  document.addEventListener("DOMContentLoaded", function () {
+    switchTab(0);
+  });
+</script>
+
+
+
+   
+
+{% endblock %}

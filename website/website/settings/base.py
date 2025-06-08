@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     "search",
     "gold_account",
     "saving_account",
+    "alrabeh_account",
 
     # Wagtail Apps 
     "wagtail.contrib.forms",

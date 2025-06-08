@@ -1,0 +1,29 @@
+{% extends "base.html" %} {% load wagtailcore_tags wagtailimages_tags %} 
+{% block content %}
+
+<!-- Full-width Image (separate from container) -->
+{% if page.image %}
+  <div class="w-full">
+    {% image page.image original class="w-full h-[50rem] object-cover" %}
+
+  </div>
+{% endif %}
+
+
+
+
+<!-- Page Content -->
+<div class="container mx-auto py-6 px-4">
+
+    {% include "News/breadcrumbs.html" %}
+    
+  <div class="bg-white p-6 rounded shadow">
+    <h1 class="text-3xl text-center font-bold text-red-600 mt-2 py-4">{{ page.short_title }}</h1>
+    
+    <!-- Body content -->
+    <div class="prose max-w-full mt-6">
+      {{ page.body|richtext }}
+    </div>
+  </div>
+</div>
+{% endblock %}

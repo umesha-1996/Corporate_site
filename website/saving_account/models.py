@@ -31,6 +31,12 @@ class SavingAccountPage(Page):
         InlinePanel("account_features", label="Features")
     ]
 
+    search_fields = Page.search_fields + [
+        index.AutocompleteField("main_title", partial_match=True),
+        index.AutocompleteField("short_description", partial_match=True),
+        index.AutocompleteField("account_features", partial_match=True)
+    ]
+
 class AccountFeature(ClusterableModel):
     page = ParentalKey(SavingAccountPage, related_name="account_features", on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
