@@ -1,0 +1,95 @@
+{% extends "base.html" %} {% load wagtailcore_tags wagtailimages_tags %} {% block content %}
+
+<section class="bg-gray-50 my-0 p-10 h-[400px]">
+  <div class="container mx-auto px-4">
+    {% include "News/breadcrumbs.html" %}
+
+    <h2
+      class="text-2xl font-bold text-gray-900"
+      style="font-family: 'Lora', serif"
+    >
+      {{ page.main_title }}
+    </h2>
+    <p
+      class="text-red-700 text-sm mb-8 py-2"
+      style="font-family: 'Open Sans', sans-serif"
+    >
+      {{ page.short_description }}
+    </p>
+
+    <div
+      class="flex flex-wrap justify-center gap-6 md:grid md:grid-cols-4 md:justify-start"
+    >
+      {% for block in page.features_icon_panel %} {% image block.value.feature_image original as img %}
+      <div class="text-center">
+        <div class="flex items-center justify-center mb-2">
+          <img
+            src="{{ img.url }}"
+            alt="{{ item.page.item_title }}"
+            class="h-20 w-20 mb-2"
+          />
+        </div>
+        <p class="text-sm font-medium">{{ block.value.feature_title }}</p>
+        <p class="text-red-700 font-semibold">
+          {{ block.value.feature_description }}
+        </p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- Tab Section -->
+<section class="bg-gray-100 py-10">
+  <div class="max-w-7xl mx-auto px-4">
+    <!-- Tabs -->
+    <div class="flex flex-wrap border-b border-gray-300 text-sm mb-4">
+      {% for feature in page.account_features.all %}
+      <button
+        onclick="switchTab({{ forloop.counter0 }})"
+        class="tab-button py-2 px-4 text-gray-600 hover:text-red-700 border-b-2 border-transparent font-medium transition"
+      >
+        {{ feature.title }}
+      </button>
+      {% endfor %}
+    </div>
+
+    <!-- Tab Contents -->
+    <div>
+      {% for feature in page.account_features.all %}
+      <div class="tab-content hidden" id="tab-{{ forloop.counter0 }}">
+        <div class="bg-white shadow p-6 rounded-lg">
+          <ul class="list-disc list-inside text-sm text-gray-700">
+            {% for desc in feature.feature_descriptions.all %}
+            <li>{{ desc.description }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- Tab -->
+<script>
+  function switchTab(index) {
+    const tabs = document.querySelectorAll(".tab-content");
+    const buttons = document.querySelectorAll(".tab-button");
+
+    tabs.forEach((tab, i) => {
+      tab.classList.toggle("hidden", i !== index);
+    });
+
+    buttons.forEach((btn, i) => {
+      btn.classList.toggle("border-red-600", i === index);
+      btn.classList.toggle("text-red-700", i === index);
+    });
+  }
+
+  // Show first tab by default
+  document.addEventListener("DOMContentLoaded", function () {
+    switchTab(0);
+  });
+</script>
+{% endblock %}
